@@ -10,7 +10,7 @@ app.use(cors());
 app.use('/public', express.static(process.cwd() + '/public'));
 
 app.get('/', function (req, res) {
-    res.sendFile('/views/index.html');
+    res.sendFile(__dirname + '/views/index.html');
 });
 
 // Multer storage configuration
