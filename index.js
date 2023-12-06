@@ -13,22 +13,11 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/views/index.html');
 });
 
-// Multer storage configuration
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'public/');
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname);
-    },
-});
-
+const storage = multer.memoryStorage();
 const upload = multer({storage: storage});
 
 app.post('/api/fileanalyse', upload.single('upfile'), (req, res) => {
-
     const {mimetype: type, originalname: name, size} = req.file;
-
     return res.json({name, type, size});
 });
 
